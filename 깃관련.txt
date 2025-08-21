@@ -1,0 +1,7 @@
+git bash 설치 후 아래 실행
+
+git config --global user.email "uniline123@naver.com"
+git config --global user.name "gatsby6060"
+
+ex) git config --global user.email "uniline123@naver.com" 
+ex) git config --global user.name "gatsby6060"
