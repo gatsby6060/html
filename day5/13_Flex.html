@@ -7,16 +7,12 @@
     <title>Document</title>
     <style>
         #container {
-            /* width: 800px; */
             display: flex;
-            /* justify-content: row; */
-
             background-color: #ccc;
             border: 2px solid black;
         }
-
         .box {
-            width: 90px;
+            width: 20px;
             margin: 5px;
             padding: 10px 20px;
             background-color: green;
@@ -24,25 +20,22 @@
             text-align: center;
         }
 
-        .wrap1 {
-            /* 디폴트. 한 줄에 표시 */
-            flex-wrap: nowrap;
+        .flow1 {
+            /* 방향과 줄바꿈을 한번에 정의 */
+            flex-wrap: row wrap;
         }
 
-        .wrap2 {
-            /*  여러 줄에 표시 */
-            flex-wrap: wrap;
+        .flow2 {
+            /* 방향과 줄바꿈을 한번에 정의 */
+            flex-wrap: row nowrap;
         }
 
-        .wrap3 {
-            /*  여러 줄에 표시(거꾸로) */
-            flex-wrap: wrap-reverse;
-        }
+
     </style>
 </head>
 
 <body>
-    <div id="container" class="wrap2">
+    <div id="container" class="flow1">
         <div class="box">1</div>
         <div class="box">2</div>
         <div class="box">3</div>
