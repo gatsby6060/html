@@ -10,13 +10,60 @@
             width: 600px;
             margin: 10px auto;
         }
-        .small{
+
+        #prod-pic,
+        #desc {
+            float: left;
+        }
+
+        .small {
             width: 60px;
             height: 60px;
             margin: 3px;
         }
-        #prod-pic{
-            margin: 10px;
+
+        #prod-pic {
+            margin: 20px 10px;
+        }
+
+        #small-img img:hover {
+            cursor: pointer;
+        }
+
+        #small-img {
+            margin-top: 10px;
+        }
+
+        #desc {
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        #desc ul {
+            list-style: none;
+            /* 리스트점 안보여주기*/
+        }
+
+        #desc li {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .blue-txt {
+            color: blue;
+            font-weight: bold;
+        }
+
+        #desc button {
+            margin: 20px 0px;
+            width: 100%;
+            /*본인영역에 최대값100%*/
+            padding: 10px;
+        }
+
+        #desc a {
+            text-decoration: none;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -26,13 +73,25 @@
         <h1>자바프로그래밍 책</h1>
         <div id="prod-pic">
             <img src="../media/java.jpg" width="200" height="200">
-            <div id = "small-img">
+            <div id="small-img">
                 <img src="../media/java2.jpg" class="small">
                 <img src="../media/java3.jpg" class="small">
                 <img src="../media/java4.jpg" class="small">
             </div>
         </div>
-        <div id="desc"></div>
+        <div id="desc">
+            <ul>
+                <li>상품명 : 자바 책</li>
+                <li class=" blue-txt">판매가 : 199,000원</li>
+                <li>배송비 : 30,000원</li>
+                <li>(50,000,000원 이상 구매시 무료)</li>
+                <li>적립금:199원(0.1%)</li>
+                <li>발매일:2023.12.30</li>
+                <button>장바구니 담기</button>
+                <a href="javascript:;">상세 설명 보기</a>
+            </ul>
+        </div>
+
     </div>
 </body>
 
