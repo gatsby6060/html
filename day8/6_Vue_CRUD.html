@@ -132,10 +132,10 @@
             },
             fnEditMode: function (map) {
                 let self = this;
-                self.info = map;
+                self.info = map;                // 어떤 행을 수정할지 참조만 보관
                 self.editMode = !self.editMode; //true false를 맞바꿔줌
-                self.name = map.STU_NAME
-                self.dept = map.STU_DEPT
+                self.name = map.STU_NAME        // self.name에 따로 넣어줌 이래야 나중에 주소 공유를 차단
+                self.dept = map.STU_DEPT        // self.dept 따로 넣어줌 이래야 나중에 주소 공유를 차단
             },
             fnAdd: function (params) {
                 location.href = "7_Vue_Insert.html";
