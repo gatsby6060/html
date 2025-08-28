@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px 20px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- {{list}} 아래쪽에서 list : []에 담긴것을 보여준다. -->
+
+        <table>
+            <tr>
+                <th>학번</th>
+                <th>이름</th>
+                <th>학과</th>
+                <th>학년</th>
+                <th>키</th>
+                <th>삭제</th>
+            </tr>
+            <tr v-for="item in list"><!--첫행에는 item 자체가 담겨있을것-->
+                <td>{{item.STU_NO}}</td><!--이후에 각각의 .키값으로 가져옴-->
+                <td>{{item.STU_NAME}}</td>
+                <td>{{item.STU_DEPT}}</td>
+                <td>{{item.STU_GRADE}}</td>
+                <td>{{item.STU_HEIGHT}}</td>
+                <td><button @click="fnRemove(item.STU_NO)">삭제</button></td><!--요래야 함수 동작함-->
+            </tr>
+        </table>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                list: [] //아래쪽에서 self.list = data.list;해서 데이터를 담아준다
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            fnUserList: function () {
+                let self = this; //이래야 vue 자신을 나타냄  아작스 안에서 쓰면 아작스를 나타내서 안됨!
+                $.ajax({
+                    url: "http://localhost:3009/list",
+                    dataType: "json",
+                    type: "GET",
+                    data: {},
+                    success: function (data) {
+                        console.log(data);
+                        self.list = data.list;
+                    }
+                });
+            },//이하 함수 추가함
+            fnRemove: function (stuNumber) {
+                let self = this;
+                if (!confirm("정말 삭제하실?")) {
+                    return; //취소시
+                }
+
+                $.ajax({
+                    url: "http://localhost:3009/delete",
+                    dataType: "json",
+                    type: "GET",
+                    data: {stuNo : stuNumber}, //서버에 보낼떄는 서버에서 정한 변수명(stuNo)을 맞춰준다
+                    success: function (data) {
+
+
+                    }
+                });
+            }
+        },
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            let self = this;
+            self.fnUserList();
+        }
+    });
+
+    app.mount('#app');
+</script>
