@@ -101,6 +101,7 @@
         methods: {
             // 함수(메소드) - (key : function())
             fnBoardList: function () {
+                alert('fnBoardList실행');
                 let self = this; //이걸 해야 위에 지역?내? list변수 사용가능
                 let param = {
                     option : self.option, // 서버로 보내줄 파라미터... option이라는 이름으로 보냄
@@ -112,6 +113,7 @@
                     type: "GET",
                     data: param, //{} 이 부분을 위 param으로 대체
                     success: function (data) {
+                        alert('fnBoardList실행성공');
                         console.log(data);
                         self.list = data.list;
                     }
