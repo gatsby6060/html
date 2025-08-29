@@ -72,7 +72,7 @@
                 </tr>
             </table>
             <div>
-                <button>수정</button>
+                <button @click="fnEdit">수정</button>
                 <!-- 삭제 주소는 /board/delete -->
                 <!--삭제후 리스트페이지로...-->
                 <button @click="fnRemove">삭제</button>
@@ -128,7 +128,10 @@
                 });
             },
             fnList: function () {
-                location.href = `board-list.html`;
+                location.href = "board-list.html";
+            },
+            fnEdit: function(){
+                location.href=`board-edit.html?boardNo=${this.boardNo}`;
             },
             fncntupdate: function () {
                 let self = this;
