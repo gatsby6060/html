@@ -180,8 +180,6 @@
             body {
                 background: url("../media/img4.jpg") no-repeat fixed;
                 background-size: cover;
-
-
             }
 
             #header {
@@ -210,7 +208,7 @@
 
             #rightside {
                 width: 400px;
-                height: 60px;
+                height: 110px;
                 background: linear-gradient(to top, rgb(250, 250, 250), white);
                 /* margin: 50px auto; */
             }
@@ -218,7 +216,7 @@
 
             #footer {
                 width: 400px;
-                height: 30px;
+                height: 60px;
                 background: linear-gradient(to bottom, rgb(250, 250, 250), white);
             }
 
@@ -292,15 +290,26 @@
             background: linear-gradient(to bottom, rgb(36, 27, 27), #333);
         }
 
+        .dark-mode #time {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(255, 118, 244);
+        }
+
         /*라이트모드 다크모드 관련 ----------------------------------------E*/
 
 
         .hint-text {
             padding: 10px;
-            font-size: 12px;            /* 작은 글씨 */
-            color: gray;            /* 회색 글씨 */
-            opacity: 0.7;            /* 흐릿하게 */
-            font-style: italic;            /* 기울임(선택) */
+            font-size: 12px;
+            /* 작은 글씨 */
+            color: gray;
+            /* 회색 글씨 */
+            opacity: 0.7;
+            /* 흐릿하게 */
+            font-style: italic;
+            /* 기울임(선택) */
         }
 
 
@@ -361,6 +370,9 @@
             <br>
             <div class="jghmarginleft jghtextbold">
                 <a href="https://www.naver.com" target="_blank">네이버 이동 클릭</a>
+                <br>
+                <br>
+                <a href="https://www.naver.com" target="_blank">게시판 이동 클릭</a>
             </div>
 
         </div>
@@ -454,8 +466,8 @@
         <div id="rightside">
             <div class="jghtextcenter" style="margin-top: 5px;">현재시간</div>
             <!-- 라이트 사이드 내용 넣고 등등 -->
-            <div class="time jghtextcenter" onclick="fnPopup()" style="cursor: pointer;"></div>
-            <br>
+            <div id="time" class="time jghtextcenter" onclick="fnPopup()" style="cursor: pointer;"></div>
+            <!-- <br> -->
             <div class="hint-text">이스터애그가 있습니다 찾으시면 소정의 상품을 드립니다.</div>
         </div>
 
@@ -477,11 +489,11 @@
             </div> -->
             <div style="font:15px sans-serif; float: right;">
                 <img src="https://visitor-badge.laobi.icu/badge?page_id=gatsby6060.introduce.intro" alt="visits"
-                    style="vertical-align:middle;height:14px;"
-                    id="visitorBadge"
-                    onclick="egg()"
-                    >
+                    style="vertical-align:middle;height:18px; margin-right: 5px;" id="visitorBadge" onclick="egg()">
             </div>
+            <button id="bgmBtnOff" style="font-size: 12px; margin: 5px;" onclick="bgmBtnOff()">노래 끄기</button>
+            <!-- <button id="bgmBtnReOn" style="font-size: 12px; margin: 5px;">노래 다시 키기</button> -->
+            <button id="bgmBtnReOn" style="font-size: 12px; margin: 5px;" onclick="bgmBtnReOn()">노래 다시 키기</button>
         </div>
 
 
@@ -548,19 +560,114 @@
                스페이스 바를 눌러 게임을 시작하세요
                점프==스페이스바 , 업드리기 == ↓`)
         let top = (screen.availHeight - 300) / 2
-        let left = (screen.availWidth - 700) / 2 
+        let left = (screen.availWidth - 700) / 2
         window.open("https://chromedino.com/", "popup3", `width=750px, height=290px, left=${left}, top=${top}`);
 
-        location.href = `../day9/board-list.html`; 
-    
+        location.href = `../day9/board-list.html`;
+
     }
 
-    function musicstart(){
+    function musicstart() {
         // 음악도 자동재생되도록 시도예정
         // mp3파일 같은 것 다운 받고....
     }
 
-    function dongyeongsang(){
+    function dongyeongsang() {
         //동영상도 어찌어찌 배경 자동 실행?
     }
 </script>
+
+<!-- 배경음악 자동재생 페이크---------------------S -->
+<iframe id="bgm" width="0" height="0"
+    
+    title="YouTube background video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<!-- <iframe id="bgm2" width="0" height="0"
+    src="https://www.youtube.com/watch?v=l5995fTszNY?autoplay=1&mute=1&loop=1&playlist=fuz2F8GGQKI&controls=0&rel=0&modestbranding=1&playsinline=1"
+    title="YouTube background video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<iframe id="bgm3" width="0" height="0"
+    src="https://www.youtube.com/watch?v=a3ju2y12-FY?autoplay=1&mute=1&loop=1&playlist=fuz2F8GGQKI&controls=0&rel=0&modestbranding=1&playsinline=1"
+    title="YouTube background video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe> -->
+<script>
+      // 1) src 문자열 3개(각자 playlist=영상ID 로 맞춘 embed URL)
+        let bgm1 = "https://www.youtube.com/embed/fuz2F8GGQKI?autoplay=1&mute=1&loop=1&playlist=fuz2F8GGQKI&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm2 = "https://www.youtube.com/embed/l5995fTszNY?autoplay=1&mute=1&loop=1&playlist=l5995fTszNY&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm3 = "https://www.youtube.com/embed/u7fx8leNkaM?autoplay=1&mute=1&loop=1&playlist=u7fx8leNkaM&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm4 = "https://www.youtube.com/embed/eQK5uort8Fk?autoplay=1&mute=1&loop=1&playlist=eQK5uort8Fk&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm5 = "https://www.youtube.com/embed/5ogUKZXBMUQ?autoplay=1&mute=1&loop=1&playlist=5ogUKZXBMUQ&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm6 = "https://www.youtube.com/embed/YfB5xeC6VsE?autoplay=1&mute=1&loop=1&playlist=YfB5xeC6VsE&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm7 = "https://www.youtube.com/embed/BQEWS4UmgHw?autoplay=1&mute=1&loop=1&playlist=BQEWS4UmgHw&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm8 = "https://www.youtube.com/embed/M8psRaOxoeI?autoplay=1&mute=1&loop=1&playlist=M8psRaOxoeI&controls=0&rel=0&modestbranding=1&playsinline=1";
+        // let bgm9 = "https://www.youtube.com/embed/-jidITdmeNM?autoplay=1&mute=1&loop=1&playlist=-jidITdmeNM&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm10 = "https://www.youtube.com/embed/6fkEIAgDLbU?autoplay=1&mute=1&loop=1&playlist=6fkEIAgDLbU&controls=0&rel=0&modestbranding=1&playsinline=1";
+        let bgm11 = "https://www.youtube.com/embed/LiW3yBJ3AF0?autoplay=1&mute=1&loop=1&playlist=LiW3yBJ3AF0&controls=0&rel=0&modestbranding=1&playsinline=1";
+
+
+        // 2) 랜덤으로 하나 고르기
+        const list = [bgm1, bgm2, bgm3, bgm4, bgm5, bgm6, bgm7, bgm8,      bgm10, bgm11];
+        const pick = list[Math.floor(Math.random() * list.length)];
+        console.log("pick된 bgm은" + pick);
+        // 3) 선택된 것을 iframe에 주입
+        const iframe = document.getElementById('bgm');
+        iframe.src = pick;
+
+
+    function bgmTest() {
+        const iframe = document.getElementById('bgm');
+        // if (!iframe) return;
+        const url = new URL(iframe.src);
+        url.searchParams.set('mute', '0'); // 음소거 해제
+        iframe.src = url.toString();
+    }
+    // 페이지 내 첫 클릭 시 자동 소리 켬 (한 번만 실행)
+    document.addEventListener('click', function one() {
+        bgmTest();
+        document.removeEventListener('click', one, { capture: true });
+    }, { capture: true, once: true });
+
+    // document.getElementById('bgmBtnOff').addEventListener('click', function () {
+    //     const iframe = document.getElementById('bgm');
+    //     if (!iframe) return;
+
+    //     const url = new URL(iframe.src);
+    //     url.searchParams.set('mute', '1');   // 다시 음소거
+    //     url.searchParams.set('autoplay', '0'); // 재로드 시 자동재생 끔
+    //     iframe.src = url.toString();
+    // });
+
+    function bgmBtnOff() {
+        const iframe = document.getElementById('bgm');
+        if (!iframe) return;
+
+        const url = new URL(iframe.src);
+        url.searchParams.set('mute', '1');   // 다시 음소거
+        // url.searchParams.set('autoplay', '0'); // 재로드 시 자동재생 끔
+        iframe.src = url.toString();
+    }
+    function bgmBtnReOn() {
+        const iframe = document.getElementById('bgm');
+        if (!iframe) return;
+
+        const url = new URL(iframe.src);
+        url.searchParams.set('mute', '0');   // 다시 소리나게...
+        // url.searchParams.set('autoplay', '1'); // 재로드 시 자동재생 킴
+        iframe.src = url.toString();
+    }
+</script>
+<!-- 배경음악 자동재생 페이크---------------------E -->
+
+
+
+<!--로컬컴퓨터 외부연결 가동-----------------------------------------------------S-->
+<script>
+  const API_BASE = 'https://f5581a5e9ccf.ngrok-free.app'; // .env에서 주입해도 됨
+  async function loadBoard() {
+    const res = await fetch(`${API_BASE}/board/list?option=all&keyword=`);
+    const { list } = await res.json();
+    // list를 테이블에 렌더링
+  }
+  document.addEventListener('DOMContentLoaded', loadBoard);
+</script>
+<!--로컬컴퓨터 외부연결 가동-----------------------------------------------------S-->
