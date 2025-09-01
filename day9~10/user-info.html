@@ -61,6 +61,11 @@
                 </tr>
             </table>
         </div>
+
+        <div>
+            <button @click="fnClose">닫기</button>
+        </div>
+
     </div>
 </body>
 
@@ -90,6 +95,9 @@
                         console.log(self.info);
                     }
                 });
+            },
+            fnClose: function(){
+                window.close();
             }
         },
         mounted() {
