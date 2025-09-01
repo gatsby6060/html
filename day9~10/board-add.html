@@ -71,12 +71,16 @@
 
                 <tr>
                     <th>제목</td>
-                    <td><input type="text" v-model="title"></td>
+                    <td style="text-align: left;">
+                        <input type="text" v-model="title">
+                        <!-- {{userId}} -->
+                    </td>
                 </tr>
 
                 <tr>
                     <th>작성자</td>
-                    <td><input type="text" v-model="userId"></td>
+                    <!-- <td><input type="text" v-model="userId" disable></td> -->
+                     <td>{{userId}}</td>
                 </tr>
 
                 <tr>
@@ -101,9 +105,10 @@
             return {
                 // 변수 - (key : value)    html상의 v-model=""에 있는 값은 여기에 적는다!
                 title: "",
-                userId: "",
+                userId: "", //세션아이디에 이거 넣을것임
                 contents: "",
-                selectItem: 1
+                selectItem: 1,
+                // sId : "" //세션 아이디를 이 sId 이름으로..
             };
         },
         methods: {
@@ -117,7 +122,14 @@
                     kind: self.selectItem
                 };
                 $.ajax({
-                    url: "http://localhost:3009/board/insert",
+                    // url: "http://localhost:3009/board/insert",
+                    url: "https://f5581a5e9ccf.ngrok-free.app/board/insert",
+                    headers: {
+                        // ngrok 경고(인터스티셜) 우회.... 경고가 있든말든?....
+                        "ngrok-skip-browser-warning": "true",
+                        // 서버에게 말한 나는 JSON이 좋아요
+                        "Accept": "application/json"
+                    },
                     dataType: "json",
                     type: "GET",
                     data: param,
@@ -135,7 +147,7 @@
 
         }, //methods------------------------끝부분
         mounted() {// 처음 시작할 때 실행되는 부분
-
+            this.userId = sessionStorage.getItem("sessionId");
         }
     });
 

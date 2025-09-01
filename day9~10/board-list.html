@@ -53,6 +53,9 @@
 
 <body>
     <div id="app">
+
+        <div><button @click="fnLogout">로그아웃</button></div>
+
         <!--테이블의 형태로-->
         <!-- 번호, 제목, 작성자, 조회수, 작성일(YYYY-MM-DD)-->
         <div id="search">
@@ -78,7 +81,10 @@
                 <td>
                     <a href="#" @click="fnView(item.BOARDNO)">{{item.TITLE}}</a>
                 </td>
-                <td>{{item.USERID}}</td>
+                <td>
+                    <span v-if="status == 'A'"><a href="javascript:;" @click="fnUserInfo(item.USERID)">{{item.USERID}}</a></span>
+                    <span v-else>{{item.USERID}}  </span>
+                </td>
                 <td>{{item.CNT}}</td>
                 <td>{{item.CTIME}} </td>
                 <!-- <td><button @click="fnRemove(item.STU_NO)">삭제</button></td>요래야 함수 동작함 -->
@@ -100,9 +106,12 @@
                 // (key : value)
                 list: [], //아래쪽에서 self.list = data.list;해서 데이터를 담아준다
                 keyword: "",
-                option: "all" //최초에 all'전체'클릭한것처럼 보이게 함 
+                option: "all", //최초에 all'전체'클릭한것처럼 보이게 함 
+                status: "", // 사용자가 관리자인지 아닌지 확인 아래서 사용할꺼임
+                userId : ""
             };
         },
+
         methods: {
             // 함수(메소드) - (key : function())
             fnBoardList: function () {
@@ -129,7 +138,7 @@
                 // });
                 //250830주석처리
 
-            
+
                 $.ajax({
                     // url: "http://localhost:3009/board/list", //로컬에서 쓰던 것 일단주석처리
                     url: "https://f5581a5e9ccf.ngrok-free.app/board/list",
@@ -163,22 +172,53 @@
 
             },
             fnView: function (boardNo) {
+                let self = this;
+                console.log(self.status);
                 location.href = `board-view.html?boardNo=${boardNo}`;
             },
             fnAdd: function (boardNo) {
-                location.href = `board-add.html`;
-            }
+                let self = this; //로그인하면 값이 잇음 안하면 없음
+                console.log(self.status); //로그인하면 값이 있음,   로그인 안하면 없음
+                if(self.status != null){
+                    location.href = "board-add.html"
+                }else{
+                    alert("로그인 후 이용해주세요");
+                    location.href="login.html";
+                }
+                // location.href = `board-add.html`;
+            },
+            fnLogout: function () {
+                sessionStorage.removeItem("sessionId"); //내가 넣은 것 지우기
+                sessionStorage.removeItem("sessionStatus");  //내가 넣은 것 지우기
+                alert("로그아웃 되었습니다.");
+                location.href = "login.html"
+            },
+            fnUserInfo: function (userId) {
+                //팝업창띄우기
+                window.open(`user-info.html?userId=${userId}`, "user",  "width=500, height=500");
+                                //주소                      // 팝업의ID        //
+                                //팝업에 아이디가 잇으면 1만번 나옴
+
+
+                // let self = this;
+                // console.log(self.userId);
+                //location.href = `user-info.html?userId=${userId}`;
+            },
         },
+
         mounted() {
+            let self = this; //함수내에서 한번씩 지역적으로 사용함 함수마다 한번씩 선언~
+
             // 페이지 보일때 처음 시작할 때 실행되는 부분
-            let sId = sessionStorage.getItem("sessionId"); //set할때 이름이 sessionID이었음 그걸 get으로 꺼냄
+            let sId = sessionStorage.getItem("sessionId"); //서버에서 set할때 이름이 sessionID이었음 그걸 get으로 꺼냄
             // let sId2 = sessionStorage;
-            console.log("세션 아이디 ====> ", sId);
-            let user_status = sessionStorage.getItem("sessionStatus");
-            console.log("세션 권한 ====> ", user_status);
+            // console.log("세션 아이디 ====> ", sId);
+            // let user_status = sessionStorage.getItem("sessionStatus");
+            // console.log("세션 권한 ====> ", user_status);
 
+            //위에서 status 선언해둠
+            self.status = sessionStorage.getItem("sessionStatus");  //서버에서 set할때 이름이 sessionID이었음 그걸 get으로 꺼냄
 
-            let self = this;
             self.fnBoardList();
         }
     });
